@@ -1,3 +1,31 @@
+# Grobid Conversion Automation
+
+The script `convert_pdfs.bash` automates the conversion of all pdfs in the `Complete/Complete/` directory.  Note that for this the script to run successfully, one must create activate the `doc2json` conda environment (steps on how to create the environment in "Setup your environment" section in this README) and run the docker container for Grobid.  To activate the conda environment (once created), run
+
+```
+conda activate doc2json
+```
+
+To build the Docker image, run
+
+```
+docker pull grobid/grobid:${desired_grobid_version}-full
+```
+Once the image is finished building, run the following command in a separate terminal:  
+
+```
+docker run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:${desired_grobid_version}-full
+```
+Note that Grobid 0.8.2 was used to transcribe papers from `Completed.zip`. 
+
+If the user desires to transcribe specific papers instead of automating an entire batch, refer to the "Process a PDF" section.  Othwerwise, run 
+
+```
+./convert_pdfs.bash
+```
+
+For batch transcription.
+
 # Convert scientific papers to S2ORC JSON
 
 This project is a part of [S2ORC](https://github.com/allenai/s2orc). For S2ORC, we convert PDFs to JSON using Grobid and a custom TEI.XML to JSON parser. That TEI.XML to JSON parser (`grobid2json`) is made available here. We additionally process LaTeX dumps from arXiv. That parser (`tex2json`) is also made available here.

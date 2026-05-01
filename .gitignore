@@ -9,6 +9,6 @@ tests/temp/*
 input_dir/*
 temp_dir/*
 output_dir/*
-Complete/*
+Complete/Complete/*
 
 all_outputs/*
